@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HDI Predictor - Global Development Index</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="header-hero">
+      <div class="header-content">
+        <div class="header-badge">📊 AI Prediction</div>
+        <h1>HDI Predictor</h1>
+        <p>Discover the Human Development Index for any country or region based on key indicators</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="card card-input">
+        <div class="card-header">
+          <h2>📍 Enter Development Indicators</h2>
+          <span class="card-subtitle">All fields are required</span>
+        </div>
+        
+        <form method="POST" action="/predict" class="form-grid">
+          <div class="form-group">
+            <div class="label-wrapper">
+              <label for="life_expectancy">Life Expectancy</label>
+              <span class="hint">Years</span>
+            </div>
+            <input 
+              id="life_expectancy" 
+              name="life_expectancy" 
+              type="number" 
+              step="0.1" 
+              placeholder="e.g., 75.5"
+              min="30" 
+              max="85"
+              required />
+            <small class="input-hint">Average lifespan in years (30-85)</small>
+          </div>
+
+          <div class="form-group">
+            <div class="label-wrapper">
+              <label for="mean_years_schooling">Mean Years of Schooling</label>
+              <span class="hint">Years</span>
+            </div>
+            <input 
+              id="mean_years_schooling" 
+              name="mean_years_schooling" 
+              type="number" 
+              step="0.1" 
+              placeholder="e.g., 10.5"
+              min="0" 
+              max="15"
+              required />
+            <small class="input-hint">Average actual years of schooling (0-15)</small>
+          </div>
+
+          <div class="form-group">
+            <div class="label-wrapper">
+              <label for="expected_years_schooling">Expected Years of Schooling</label>
+              <span class="hint">Years</span>
+            </div>
+            <input 
+              id="expected_years_schooling" 
+              name="expected_years_schooling" 
+              type="number" 
+              step="0.1" 
+              placeholder="e.g., 14.5"
+              min="0" 
+              max="20"
+              required />
+            <small class="input-hint">Expected duration of education (0-20)</small>
+          </div>
+
+          <div class="form-group">
+            <div class="label-wrapper">
+              <label for="gni_per_capita">GNI per Capita</label>
+              <span class="hint">USD</span>
+            </div>
+            <input 
+              id="gni_per_capita" 
+              name="gni_per_capita" 
+              type="number" 
+              step="100" 
+              placeholder="e.g., 25000"
+              min="1000" 
+              max="150000"
+              required />
+            <small class="input-hint">Gross National Income per person (USD)</small>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>🚀 Get HDI Prediction</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">💡</div>
+          <h3>How It Works</h3>
+          <p>Our AI model analyzes development indicators to predict the Human Development Index, a measure of a nation's achievement.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📈</div>
+          <h3>Key Indicators</h3>
+          <p>Life expectancy, education levels, and income are the three pillars of HDI measurement.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🎯</div>
+          <h3>Instant Results</h3>
+          <p>Get your prediction in milliseconds with a clear tier classification.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>HDI Predictor © 2026 • Powered by Machine Learning</p>
+    </footer>
+  </div>
+</body>
+</html>
+

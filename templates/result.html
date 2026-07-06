@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your HDI Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .result-content {
+      animation: slideIn 0.6s ease-out;
+    }
+    @keyframes fillGauge {
+      from {
+        width: 0%;
+      }
+      to {
+        width: {{ (hdi_score / 1.0) * 100 }}%;
+      }
+    }
+    .gauge-fill {
+      animation: fillGauge 1.2s ease-out 0.3s forwards;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header-hero">
+      <div class="header-content">
+        <div class="header-badge">✅ Prediction Complete</div>
+        <h1>Your HDI Result</h1>
+        <p>Discover the development classification</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="result-content">
+        <div class="card card-result">
+          <div class="result-main">
+            <div class="score-display">
+              <div class="score-container">
+                <h2>HDI Score</h2>
+                <div class="score-number" id="score">{{ '%.3f'|format(hdi_score) }}</div>
+                <small>on a 0.0 to 1.0 scale</small>
+              </div>
+            </div>
+
+            <div class="gauge-container">
+              <div class="gauge-track">
+                <div class="gauge-fill" style="width: {{ (hdi_score / 1.0) * 100 }}%;"></div>
+              </div>
+              <div class="gauge-labels">
+                <span>Low (0.0)</span>
+                <span>Medium (0.55)</span>
+                <span>High (0.85)</span>
+                <span>Very High (1.0)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tier-display tier-{{ tier | lower | replace(' ', '-') }}">
+            <div class="tier-icon">
+              {% if tier == 'Very High' %}
+                🌟
+              {% elif tier == 'High' %}
+                ⭐
+              {% elif tier == 'Medium' %}
+                📊
+              {% else %}
+                📉
+              {% endif %}
+            </div>
+            <div class="tier-info">
+              <h3>Development Tier</h3>
+              <p class="tier-label">{{ tier }}</p>
+              <p class="tier-description">
+                {% if tier == 'Very High' %}
+                  This region demonstrates exceptional human development with high life expectancy, education, and income levels.
+                {% elif tier == 'High' %}
+                  This region shows strong human development indicators across health, education, and economic measures.
+                {% elif tier == 'Medium' %}
+                  This region demonstrates moderate development with balanced progress in key indicators.
+                {% else %}
+                  This region is in the early stages of development with opportunities for improvement.
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-grid">
+          <div class="insight-card">
+            <div class="insight-title">What This Means</div>
+            <p>The HDI combines three key dimensions: life expectancy (health), Mean Years of Schooling (education), and GNI per capita (standard of living).</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-title">Tier Ranges</div>
+            <ul>
+              <li><strong>Very High:</strong> 0.800 to 1.000</li>
+              <li><strong>High:</strong> 0.700 to 0.799</li>
+              <li><strong>Medium:</strong> 0.550 to 0.699</li>
+              <li><strong>Low:</strong> Below 0.550</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/" class="btn-primary">🔄 Make Another Prediction</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>HDI Predictor © 2026 • Powered by Machine Learning</p>
+    </footer>
+  </div>
+</body>
+</html>
+
