@@ -1,20 +1,6 @@
-# Python cache files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual environment
 .venv/
 venv/
-ENV/
 env/
-
-# Model artifacts
-model.pkl
-
-# VS Code settings
-.vscode/
-
-# OS files
-.DS_Store
-Thumbs.db
+__pycache__/
+*.pyc
+.vercel
