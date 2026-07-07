@@ -1,0 +1,9 @@
+.venv/
+venv/
+env/
+train_model.py
+data/
+TODO.md
+README.md
+__pycache__/
+*.pyc
